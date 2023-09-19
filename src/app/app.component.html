@@ -1,0 +1,21 @@
+<cdk-accordion class="example-accordion" [multi]="freemovement?'true':'false'">
+  <cdk-accordion-item
+    *ngFor="let item of items"
+    #accordionItem="cdkAccordionItem"
+    [class]="accordionItem.expanded ? 'example-accordion-item example-accordion-item-header-expanded xxx':'example-accordion-item'">
+    <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+      {{ item.title }}
+      <span *ngIf="item.content && item.content.text" [class]="accordionItem.expanded ? 'example-accordion-item-description up':'example-accordion-item-description down'"></span>
+    </div>
+    <div
+      *ngIf="item.content && item.content.text"
+      [class]="accordionItem.expanded ? 'example-accordion-item-body':''"
+      [@contentExpansion]="accordionItem.expanded ? 'expanded':'collapsed'">
+      <ul class="example-accordion-item-subitems">
+          <li *ngFor="let subitem of item.content.text" class="example-accordion-item-subitem">
+              {{ subitem?subitem:'--Empty text--' }}
+          </li>
+      </ul>
+    </div>
+  </cdk-accordion-item>
+</cdk-accordion>
